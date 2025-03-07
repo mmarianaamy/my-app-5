@@ -1,30 +1,31 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import { resultsData, j } from "../types";
 
 export const useFetchData = (url : string) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [userHistory, setUserHistory] = useState<resultsData[]>([]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      const json : j = await response.json();
+      setUserHistory((userHistory) => [...userHistory, json.results[0]])
+    } catch (error) {
+      setError(error)
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        console.log(json)
-        setData(json);
-      } catch (error) {
-        setError(error)
-      } finally {
-        setLoading(false);
-      }
-    };
 
     fetchData()
 
   }, [url]);
 
-  return { data, loading, error}
+  return { data: {loading, error, userHistory}, refetch: fetchData}
 };

@@ -1,7 +1,7 @@
 export interface apicall {
-  data: userData;
   loading: boolean;
   error: string;
+  userHistory: resultsData[];
 }
 
 export interface userData {
@@ -11,7 +11,33 @@ export interface userData {
 export interface resultsData {
   name: nameData,
   email: string,
-  picture: pictureData
+  picture: pictureData,
+  dob: dobData,
+  location: locationData,
+  phone: string,
+  cell: string,
+  login: loginData
+}
+
+export interface loginData {
+  username: string,
+  password: string
+}
+
+export interface locationData {
+  street: streetData
+  city: string,
+  state: string,
+  country: string
+}
+
+export interface streetData {
+  number : number
+  name: string
+}
+
+export interface dobData {
+  age: string
 }
 
 export interface nameData {
@@ -22,4 +48,8 @@ export interface nameData {
 
 export interface pictureData {
   medium : string
+}
+
+export interface j {
+  results: resultsData[]
 }

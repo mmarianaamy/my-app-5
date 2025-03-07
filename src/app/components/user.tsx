@@ -1,11 +1,19 @@
-import { userData } from "../types";
+import { Person } from "@mui/icons-material";
+import { resultsData } from "../types";
 
-export default function User (results : userData) {
+interface userProps{
+    results: resultsData;
+}
+
+export default function User (u : userProps) {
     return (
-        <div>
-            <img src={results.results[0].picture.medium}></img>
-            <p>{results.results[0].name.first} {results.results[0].name.last}</p>
-            <p>{results.results[0].email}</p>
+        <div className="flex flex-col items-center justify-center text-center gap-2">
+            { u.results.picture && 
+                <img className="rounded-full w-40" src={u.results.picture.medium}></img>
+            }
+            <p className="text-2xl">Hi! I'm</p>
+            <p className="text-5xl">{u.results.name.first} {u.results.name.last}</p>
+            <Person />
         </div>
     )
 }
