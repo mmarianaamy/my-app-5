@@ -12,7 +12,7 @@ export default function User (u : userProps) {
                 // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
                 <img className="rounded-full w-40" src={u.results.picture.medium}></img>
             }
-            <p className="text-2xl">Hi! I'm</p>
+            <p className="text-2xl">Hi! I&apos;m</p>
             <p className="text-5xl">{u.results.name.first} {u.results.name.last}</p>
             <Person />
         </div>
